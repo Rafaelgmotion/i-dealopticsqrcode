@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Visite e ganhe um brinde · Comércio Local</title>
+  <style>
+    /* reset extremamente leve */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e9e0d5;  /* fundo suave */
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+      color: #1f2a1f;
+    }
+
+    /* CARD PRINCIPAL – limpo, sem emojis */
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2.5rem 2.5rem 2rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      border: 1px solid #ffffff80;
+    }
+
+    /* TOPO IMPACTANTE – sem emoji, apenas tipografia e cor */
+    .hero {
+      background: #fdcc5c;  /* amarelo quente */
+      padding: 2.5rem 2rem 2.8rem 2rem;
+      text-align: center;
+      border-bottom: 6px solid #f0a500;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #1e3a1e;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0 #fff7e6;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .hero .destaque {
+      font-size: 2rem;
+      font-weight: 700;
+      background: #ffffffd0;
+      display: inline-block;
+      padding: 0.5rem 2rem;
+      border-radius: 100px;
+      box-shadow: 0 6px 0 #b87e1b, 0 4px 12px #0000001a;
+      color: #2a421a;
+      backdrop-filter: blur(2px);
+      border: 1px solid #fff;
+    }
+
+    /* ÁREA DE INFORMAÇÕES */
+    .info {
+      padding: 2.2rem 2rem 2.4rem;
+      background: #fcf9f5;
+    }
+
+    /* ENDEREÇO COM ÍCONE TEXTUAL (substituto de emoji) */
+    .endereco {
+      display: flex;
+      gap: 1rem;
+      background: #f1e9de;
+      padding: 1.4rem 1.5rem;
+      border-radius: 2rem;
+      border-left: 8px solid #fdcc5c;
+      margin-bottom: 2rem;
+    }
+
+    .endereco-marker {
+      font-size: 1.8rem;
+      font-weight: 500;
+      background: #a85216;
+      color: white;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 0 #4f2a0b;
+    }
+
+    .endereco-texto {
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .endereco-texto span {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #3f3a33;
+      margin-top: 0.4rem;
+      background: #ffffffba;
+      padding: 0.2rem 1rem;
+      border-radius: 60px;
+    }
+
+    /* MAPA VISUAL LEVE – sem emojis, usando formas geométricas */
+    .mapa-container {
+      background: #c8ddee;
+      border-radius: 2rem;
+      margin: 2rem 0 2rem 0;
+      border: 2px solid white;
+      box-shadow: 0 10px 0 #7d9bb3;
+    }
+
+    .mapa-fake {
+      padding: 1.5rem 1rem;
+      background: #aac7df;
+      background-image: linear-gradient(45deg, #b8d2ea 2px, transparent 2px),
+                        linear-gradient(-45deg, #b0cde6 2px, transparent 2px);
+      background-size: 30px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1.8rem;
+    }
+
+    .local-icon {
+      width: 3rem;
+      height: 3rem;
+      background: #e43939;
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(45deg);
+      box-shadow: 0 6px 0 #8f2222;
+      margin: 0.5rem 0 0.8rem;
+      border: 2px solid white;
+    }
+
+    .rua-destaque {
+      background: #f9f1e2;
+      padding: 0.6rem 2rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      border: 2px dashed #3f4e2c;
+      margin: 0.8rem 0 0.2rem;
+    }
+
+    .distancia {
+      font-size: 1.1rem;
+      background: #32323220;
+      padding: 0.3rem 1.8rem;
+      border-radius: 40px;
+      color: #1e2d0e;
+      font-weight: 500;
+      backdrop-filter: blur(2px);
+    }
+
+    /* HORÁRIO DE FUNCIONAMENTO CORRETO */
+    .horarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      background: #e3d9cd;
+      border-radius: 2rem;
+      padding: 1.4rem 1.8rem;
+      margin: 2rem 0 1.6rem;
+      border: 2px solid white;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .horario-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .badge-dia {
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: #49443a;
+      color: white;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      text-align: center;
+    }
+
+    .badge-hora {
+      font-weight: 600;
+      font-size: 1.3rem;
+      background: white;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-top: 0.3rem;
+      border: 1px solid #c0a67a;
+    }
+
+    .sabado {
+      background: #2a6b2a;
+    }
+
+    /* BOTÃO WHATSAPP FORTE, SEM EMOJI, USANDO "W" */
+    .whatsapp-link {
+      background: #25D366;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.7rem;
+      padding: 0.6rem 0.6rem 0.6rem 1.2rem;
+      box-shadow: 0 10px 0 #1a8a44, 0 10px 20px #00000025;
+      border: 2px solid #fff9;
+      margin: 1.8rem 0 1.2rem;
+      transition: all 0.1s ease;
+    }
+
+    .whatsapp-link:hover {
+      background: #20b859;
+      transform: translateY(3px);
+      box-shadow: 0 7px 0 #146b34, 0 12px 20px #25d36670;
+    }
+
+    .whatsapp-link:active {
+      transform: translateY(9px);
+      box-shadow: 0 2px 0 #0f5529;
+    }
+
+    .whatsapp-icon {
+      background: white;
+      color: #25D366;
+      border-radius: 50%;
+      width: 2.8rem;
+      height: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      box-shadow: inset -2px -2px 3px #00000020;
+    }
+
+    .whatsapp-numero {
+      background: #ffffff40;
+      padding: 0.6rem 1.5rem;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+      border: 1px solid #fff8;
+      margin: 0 0.5rem;
+    }
+
+    /* SELO BRINDE – sem emojis */
+    .selo-brinde {
+      background: #fadfaa;
+      border-radius: 60px;
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-weight: 700;
+      font-size: 1.4rem;
+      border: 3px dotted #9a6f3b;
+      color: #4e2f12;
+      margin: 1.5rem 0 0.8rem;
+    }
+
+    .selo-brinde span {
+      background: #c19044;
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* Ajuste para celular */
+    @media (max-width: 500px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero .destaque {
+        font-size: 1.5rem;
+      }
+      .endereco-texto {
+        font-size: 1.2rem;
+      }
+      .whatsapp-link {
+        font-size: 1.3rem;
+      }
+      .whatsapp-numero {
+        font-size: 1.1rem;
+      }
+      .horarios {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- TOPO: mensagem puramente tipográfica -->
+    <div class="hero">
+      <h1>Faça-nos uma visita</h1>
+      <div class="destaque">e ganhe um brinde surpresa</div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="info">
+      <!-- ENDEREÇO (sem emoji) -->
+      <div class="endereco">
+        <div class="endereco-marker">P</div> <!-- P de ponto -->
+        <div class="endereco-texto">
+          Rua João de Souza, nº 03 <br> Vila Isabel - Três Rios - RJ
+          <span>próximo à praça · estacionamento fácil</span>
+        </div>
+      </div>
+
+      <!-- MAPA VISUAL ABSTRATO (100% livre de emoji) -->
+      <div class="mapa-container">
+        <div class="mapa-fake">
+          <div class="local-icon"></div>
+          <div class="rua-destaque">R. João de Souza, 03</div>
+          <div class="distancia">centro · Vila Isabel</div>
+          <div style="display: flex; gap: 0.4rem; margin: 1rem 0 0.2rem;">
+            <span style="background: #959e76; width: 1.8rem; height: 0.5rem; border-radius: 2rem;"></span>
+            <span style="background: #b9ab84; width: 2.5rem; height: 0.5rem; border-radius: 2rem;"></span>
+            <span style="background: #618a5c; width: 1.8rem; height: 0.5rem; border-radius: 2rem;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HORÁRIO DE FUNCIONAMENTO CORRETO (segunda a sexta 09-19, sábado 09-13) -->
+      <div class="horarios">
+        <div class="horario-item">
+          <span class="badge-dia">segunda a sexta</span>
+          <span class="badge-hora">09:00 – 19:00</span>
+        </div>
+        <div class="horario-item">
+          <span class="badge-dia" style="background:#347834;">sábado</span>
+          <span class="badge-hora">09:00 – 13:00</span>
+        </div>
+        <div class="horario-item">
+          <span class="badge-dia" style="background:#af4c4c;">domingo</span>
+          <span class="badge-hora" style="background:#ccc;">fechado</span>
+        </div>
+      </div>
+
+      <!-- WHATSAPP: logo representado pela letra W -->
+      <a href="https://wa.me/552499338282?text=Olá!%20Vi%20a%20promoção%20de%20brinde%20surpresa%20e%20gostaria%20de%20visitar." 
+         class="whatsapp-link" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        <span class="whatsapp-icon">W</span>
+        <span class="whatsapp-numero">(24) 99331-8282</span>
+        <span style="font-size:2rem; margin-right:0.5rem;">→</span>
+      </a>
+
+      <!-- SELO BRINDE SEM EMOJI -->
+      <div class="selo-brinde">
+        <span>+</span> surpresa garantido na sua visita <span>+</span>
+      </div>
+
+      <!-- PEQUENA NOTA DE FUNCIONAMENTO (reforço) -->
+      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: #4f4a40; background: #ede5d8; padding: 0.6rem; border-radius: 60px;">
+        ♿ acessível · venha receber seu presente
+      </div>
+    </div>
+  </div>
+
+  <!-- OBS: Nenhum emoji foi utilizado no código; tudo substituído por caracteres comuns e formas CSS. 
+       Horário ajustado conforme solicitado: segunda a sexta 09-19, sábado 09-13. -->
+</body>
+</html>
