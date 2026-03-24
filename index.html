@@ -332,60 +332,88 @@ body {
    Falar no WhatsApp
 </a>
 
-<script>  
-/* TIMER COM URGÊNCIA */
-function startTimer(duration) {
-  let timer = duration, minutes, seconds;
-  setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+  /* ================= TIMER 15 MIN ================= */
+  function startTimer(duration) {
+    let timer = duration;
+    const display = document.getElementById('timer');
 
-    document.getElementById('timer').innerHTML = 
-      "Oferta expira em " + minutes + ":" + seconds;
+    if (!display) return;
 
-    if (--timer < 0) {
-      timer = duration;
-    }
-  }, 1000);
-}
+    const interval = setInterval(function () {
+      let minutes = Math.floor(timer / 60);
+      let seconds = timer % 60;
 
-startTimer(600);
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-/* TRACK LEAD */
-const track = document.getElementById('reviewsTrack');
+      display.innerHTML = "Oferta expira em " + minutes + ":" + seconds;
 
-let position = 0;
-let speed = 0.6;
-let isPaused = false;
+      if (timer <= 0) {
+        clearInterval(interval);
+        display.innerHTML = "Oferta encerrada";
+      }
 
-track.addEventListener('mouseenter', () => isPaused = true);
-track.addEventListener('mouseleave', () => isPaused = false);
-
-function animate() {
-  if (!isPaused) {
-    position -= speed;
-
-    if (Math.abs(position) >= track.scrollWidth / 2) {
-      position = 0;
-    }
-
-    track.style.transform = `translateX(${position}px)`;
+      timer--;
+    }, 1000);
   }
 
-  requestAnimationFrame(animate);
-}
+  startTimer(900); // 15 minutos
 
-animate();
+
+  /* ================= ID ÚNICO PARA SORTEIO ================= */
+  function generateVisitorID() {
+    let existingID = localStorage.getItem("visitorID");
+
+    if (!existingID) {
+      // Gera ID mais confiável (timestamp + random)
+      const random = Math.floor(Math.random() * 9000) + 1000;
+      const timestamp = Date.now().toString().slice(-5);
+      existingID = timestamp + random;
+
+      localStorage.setItem("visitorID", existingID);
+    }
+
+    return existingID;
+  }
+
+  const visitorElement = document.getElementById('visitorNumber');
+  if (visitorElement) {
+    visitorElement.innerText = generateVisitorID();
+  }
+
+
+  /* ================= CARROSSEL ================= */
+  const track = document.getElementById('reviewsTrack');
+
+  if (track) {
+    let position = 0;
+    let speed = 0.6;
+    let isPaused = false;
+
+    track.addEventListener('mouseenter', () => isPaused = true);
+    track.addEventListener('mouseleave', () => isPaused = false);
+
+    function animate() {
+      if (!isPaused) {
+        position -= speed;
+
+        if (Math.abs(position) >= track.scrollWidth / 2) {
+          position = 0;
+        }
+
+        track.style.transform = `translateX(${position}px)`;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+});
 </script>
-
-<script>
-// Gerar número aleatório entre 1000 e 9999
-const randomNum = Math.floor(Math.random() * 9000) + 1000;
-document.getElementById('visitorNumber').innerText = randomNum;
-</script>
-
 </body>
 </html>
