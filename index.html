@@ -335,32 +335,30 @@ body {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* ================= TIMER 15 MIN ================= */
-  function startTimer(duration) {
-    let timer = duration;
-    const display = document.getElementById('timer');
-
-    if (!display) return;
-
-    const interval = setInterval(function () {
-      let minutes = Math.floor(timer / 60);
-      let seconds = timer % 60;
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.innerHTML = "Oferta expira em " + minutes + ":" + seconds;
-
-      if (timer <= 0) {
-        clearInterval(interval);
-        display.innerHTML = "Oferta encerrada";
-      }
-
-      timer--;
-    }, 1000);
-  }
-
-  startTimer(900); // 15 minutos
+  /* ================= VALIDADE +2 DIAS ================= */
+    function updateExpirationDate() {
+      const display = document.getElementById('timer');
+    
+      if (!display) return;
+    
+      // Data atual
+      const now = new Date();
+    
+      // Adiciona 2 dias
+      now.setDate(now.getDate() + 2);
+    
+      // Formatação BR
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+    
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+      display.innerHTML = `Oferta válida até ${day}/${month}/${year} às ${hours}:${minutes}`;
+    }
+    
+    updateExpirationDate();
 
 
   /* ================= ID ÚNICO PARA SORTEIO ================= */
